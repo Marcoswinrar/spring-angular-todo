@@ -14,31 +14,34 @@ import javax.validation.constraints.NotBlank;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 public class TodoItem {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@NotBlank
 	@Column
 	private String title;
-	
+
 	@Column
 	private String description;
-	
+
 	@Column
 	private boolean isFinished;
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
 	@CreatedDate
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@Column(nullable = false, updatable = false)
 	private Date creationDate;
-	
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
 	@LastModifiedDate
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@Column(nullable = false)
 	private Date modifiedDate;
 
@@ -49,7 +52,7 @@ public class TodoItem {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
+
 	public String getDescription() {
 		return description;
 	}

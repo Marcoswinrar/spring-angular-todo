@@ -46,7 +46,12 @@ public class TodoItemController {
 	@PutMapping(path = { "/{id}" })
 	  public TodoItem update(@PathVariable("id") Long id, @RequestBody TodoItem item){
 	    TodoItem itemToUpdate = service.findById(id).get();
+	    
+	    itemToUpdate.setTitle(item.getTitle());
 	    itemToUpdate.setDescription(item.getDescription());
+	    itemToUpdate.setFinished(item.isFinished());
+	    itemToUpdate.setModifiedDate(item.getModifiedDate());
+	    
 	    return service.save(itemToUpdate);
 	 }
 	
