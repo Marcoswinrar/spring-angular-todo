@@ -39,7 +39,7 @@ gradle :bootRun
 ## Server  
 
 * Java 12  
-* Spring Boot  
+* Spring Boot 2.1.4
 * JPA  
 * JUNIT
 * MySql  
