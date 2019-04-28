@@ -25,7 +25,7 @@ gradle :bootRun
 ```
 
 * Necessário o gradle-cli para rodar desta forma.  
-* Também é preciso mudar as cconfiguraçãoes da base de dados no arquivo application.properties do spring para que funcione corretamente.
+* Também é preciso mudar as configurações da base de dados no arquivo application.properties do spring para que funcione corretamente.
 * Fiz alguns testes com JUnit, estando disponivel no seu respectivo pacote. 
 
 ### Técnologias e ferramentas  
