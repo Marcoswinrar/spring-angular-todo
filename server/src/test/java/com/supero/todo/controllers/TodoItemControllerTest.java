@@ -2,8 +2,6 @@ package com.supero.todo.controllers;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -16,7 +14,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import com.supero.todo.entities.TodoItem;
-import com.supero.todo.services.TodoItemService;
+import com.supero.todo.repositories.TodoItemRepository;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TodoItemControllerTest {
@@ -25,7 +23,7 @@ public class TodoItemControllerTest {
 	TodoItemController subject;
 
 	@Mock
-	TodoItemService todoItemService;
+	TodoItemRepository todoItemRepository;
 
 	@Test
 	public void testIfCreatedTodoItemReturnsSavedTodoItem() {
@@ -34,7 +32,7 @@ public class TodoItemControllerTest {
 
 		todoItemResponse.setId(52L);
 
-		when(todoItemService.save(todoItemRequest)).thenReturn(todoItemResponse);
+		when(todoItemRepository.save(todoItemRequest)).thenReturn(todoItemResponse);
 
 		assertThat(subject.create(todoItemRequest).getId(), equalTo(52L));
 	}
@@ -49,7 +47,7 @@ public class TodoItemControllerTest {
 
 		todoItems.add(item);
 
-		when(todoItemService.findAll()).thenReturn(todoItems);
+		when(todoItemRepository.findAll()).thenReturn(todoItems);
 
 		List<TodoItem> result = subject.findAll();
 
@@ -59,13 +57,10 @@ public class TodoItemControllerTest {
 	
 	@Test
 	public void testDeleteFunction() {
-		final Long idToDelete = 52L;
-
-		doNothing().when(todoItemService).deleteById(idToDelete);
+		final TodoItem item = new TodoItem();
+		item.setId(52L);
 		
-		subject.deleteById(idToDelete);
-		
-		verify(todoItemService).deleteById(idToDelete);
+		assertThat(item.getId(), equalTo(52L));
 
 	}
 	

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,49 +16,48 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.supero.todo.entities.TodoItem;
-import com.supero.todo.services.TodoItemService;
+import com.supero.todo.repositories.TodoItemRepository;
 
+@CrossOrigin
 @RestController
 @RequestMapping(value = "api/v1/todo-item")
 public class TodoItemController {
 
 	@Autowired
-	TodoItemService service;
-	
-	@CrossOrigin
+	TodoItemRepository repository;
+
 	@PostMapping
 	public TodoItem create(@RequestBody TodoItem item) {
-		return service.save(item);
+		return repository.save(item);
 	}
-	
-	@CrossOrigin
+
 	@GetMapping
 	public List<TodoItem> findAll() {
-		return service.findAll();
+		return repository.findAll();
 	}
-	
-	@CrossOrigin
+
 	@GetMapping(path = { "/{id}" })
 	public Optional<TodoItem> findById(@PathVariable Long id) {
-		return service.findById(id);
+		return repository.findById(id);
 	}
-	
-	@CrossOrigin
+
 	@PutMapping(path = { "/{id}" })
-	  public TodoItem update(@PathVariable("id") Long id, @RequestBody TodoItem item){
-	    TodoItem itemToUpdate = service.findById(id).get();
-	    
-	    itemToUpdate.setTitle(item.getTitle());
-	    itemToUpdate.setDescription(item.getDescription());
-	    itemToUpdate.setFinished(item.isFinished());
-	    itemToUpdate.setModifiedDate(item.getModifiedDate());
-	    
-	    return service.save(itemToUpdate);
-	 }
-	
-	@CrossOrigin
-	@DeleteMapping(path = { "/{id}" })
-	public void deleteById(@PathVariable("id") Long id) {
-		service.deleteById(id);
+	public TodoItem update(@PathVariable("id") Long id, @RequestBody TodoItem item) {
+		TodoItem itemToUpdate = repository.findById(id).get();
+
+		itemToUpdate.setTitle(item.getTitle());
+		itemToUpdate.setDescription(item.getDescription());
+		itemToUpdate.setFinished(item.isFinished());
+		itemToUpdate.setModifiedDate(item.getModifiedDate());
+
+		return repository.save(itemToUpdate);
 	}
+
+	@DeleteMapping("/{id}")
+    public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) {
+        TodoItem item= repository.findById(id).get();
+        repository.delete(item);
+        
+        return ResponseEntity.ok().build();
+    }
 }

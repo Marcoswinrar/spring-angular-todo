@@ -14,8 +14,6 @@ import javax.validation.constraints.NotBlank;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 @Entity
 public class TodoItem {
 
@@ -35,14 +33,12 @@ public class TodoItem {
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@CreatedDate
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@Column(nullable = false, updatable = false)
 	private Date creationDate;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@LastModifiedDate
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	@Column(nullable = false)
+	@Column
 	private Date modifiedDate;
 
 	public Long getId() {
