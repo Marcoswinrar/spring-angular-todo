@@ -1,0 +1,27 @@
+<div class="card text-right mb-2">
+  <div class="card-header">
+    <div class="row">
+      <div class="col-8">
+        <h5 class="card-title text-left">{{ title }}</h5>
+      </div>
+      <div class="col-4">
+        <div ng-switch="finished">
+          <div ng-switch-when="true">
+            <span class="badge badge-success">Finished</span>
+          </div>
+          <div ng-switch-default>
+              <span class="badge badge-warning">In Progress</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col">
+        <p class="card-text text-justify">{{ description }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="card-footer text-muted ng-transclude"></div>
+</div>

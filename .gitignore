@@ -13,12 +13,7 @@ HELP.md
 .sts4-cache
 bin/
 
-### IntelliJ IDEA ###
-.idea
-*.iws
-*.iml
-*.ipr
-/out/
+
 
 ### NetBeans ###
 /nbproject/private/
@@ -29,3 +24,6 @@ bin/
 
 ### VS Code ###
 .vscode/
+node_modules/*
+dist/*
+

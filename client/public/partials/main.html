@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="w-100 todo__buttons mb-2">
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="type to find an specific task.." ng-model="taskFilter"
+        ng-model-options="{ debounce: 300 }">
+      <div class="input-group-append">
+        <a href="#/tasks/new" class="btn btn-large btn-dark" type="button">New task</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <task-panel ng-repeat="task in tasks | filter: taskFilter" title='{{task.title}}' description="{{task.description}}"
+    finished="{{task.finished}}">
+    <div class="row">
+      <div class="col-md-6 col-sm-12">
+        <p class="text-left">Creation date: {{ task.creationDate | date: 'd/MM/yyyy hh:mm' }}</p>
+        <p class="text-left" ng-if='task.modifiedDate'>Modified date: {{ task.modifiedDate | date: 'd/MM/yyyy hh:mm' }}
+        </p>
+      </div>
+      <div class="col-md-6">
+        <a href="#/task/edit/{{task.id}}" class="btn btn-outline-dark">Edit</a>
+        <button type="button" class="btn btn-outline-danger" ng-click="remove(task)">Remove</button>
+      </div>
+    </div>
+  </task-panel>
+</div>

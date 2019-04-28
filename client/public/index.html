@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html ng-app="todo-ui">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+  <title>todo-ui</title>
+
+  <!--CSS IMPORTS-->
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/fonts.css">
+  <link rel="stylesheet" href="css/main.css">
+
+  <!--ANGULAR IMPORTS-->
+  <script src="js/lib/angular.min.js"></script>
+  <script src="js/lib/angular-route.min.js"></script>
+
+  <!--JS IMPORTS-->
+  <script src="js/services/main.js"></script>
+  <script src="js/controllers/task-controller.js"></script>
+  <script src="js/directives/task-directives.js"></script>
+  <script src="js/controllers/new-task-controller.js"></script>
+
+</head>
+
+<body ng-controller="TaskController">
+
+  <header class="todo__navbar">
+    <nav class="navbar navbar-light bg-light">
+      <span class="navbar-brand navbar__title">Tasks</span>
+    </nav>
+  </header>
+  <main class="todo__content">
+    <ng-view>
+  </main>
+</body>
+
+</html>
