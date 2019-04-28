@@ -42,6 +42,7 @@ gradle :bootRun
 * Spring Boot 2.1.4
 * JPA  
 * JUNIT
+* Gradle  
 * MySql  
 
 
